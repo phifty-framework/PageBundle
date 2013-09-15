@@ -1,0 +1,127 @@
+#!/usr/bin/env php
+<?php
+require 'main.php';
+use Symfony\Component\CssSelector\CssSelector;
+
+if ( count($argv) < 2 ) {
+    die("page_import [config file]");
+}
+
+list($script,$configFile) = $argv;
+
+$config = ConfigKit\ConfigCompiler::load($configFile);
+
+// $content = dom_query( $dom, '#product-content' )->item(0)->C14N();
+function dom_query($dom , $query)
+{
+    $xpathQuery = CssSelector::toXpath($query);
+    $xpath = new \DOMXPath($dom);
+    return $xpath->query($xpathQuery);
+}
+
+mb_internal_encoding('utf-8');
+
+$files = array();
+foreach( (array) $config['Templates'] as $file ) {
+    $g = glob($file);
+    $files = array_merge($files,$g);
+}
+
+$app = Phifty\Console::getInstance();
+$logger = $app->getLogger();
+foreach( $files as $file ) {
+    $logger->info("Importing $file...");
+
+
+    // title: .page-tag
+    // content: .page-content
+    $selector = array(
+        'title' => '.page-title',
+        'content' => '.page-content',
+    ) + $config['Selectors'];
+
+    $view = kernel()->view;
+
+    $logger->info("Rendering $file...");
+    $html = $view->render($file);
+
+    try {
+        libxml_use_internal_errors(true);
+        $dom = new DOMDocument;
+        $dom->encoding='utf-8';
+        $dom->preserveWhiteSpace = true;
+        $dom->formatOutput = true;
+
+        $logger->info("Parsing $file...");
+        $dom->loadHTML($html);
+        libxml_clear_errors();
+
+    } catch(Exception $e) {
+        echo $e->getMessage(), "\n";
+        echo "=======================================\n";
+        $msg = $e->getMessage();
+        if ( preg_match("#line: (\d+)#", $msg, $regs) ) {
+            $lines = explode("\n",$html);
+            $lineNr = intval($regs[1]);
+            $rangeFrom = $lineNr - 5;
+            if ($rangeFrom < 0) {
+                $rangeFrom = 0;
+            }
+            $lines[ $lineNr - 1 ] = "\033[1;32m" . $lines[ $lineNr - 1 ] . "\033[0m";
+            echo join("\n",array_splice($lines, $rangeFrom, 10));
+            die();
+        }
+    }
+
+    $title   = dom_query($dom, $selector['title'] )->item(0);
+    $content = dom_query($dom, $selector['content'] )->item(0);
+
+    $lang = $title->getAttribute('data-lang') ?: $content->getAttribute('data-lang');
+
+    $identity = $title->getAttribute('data-identity')
+            ?: $content->getAttribute('data-identity')
+            ?: basename($file,'.html'); // get identity from file name
+
+    if ( ! $title ) {
+        $logger->info("Skipping: title not found");
+    }
+    if ( ! $content ) {
+        $logger->info("Skipping: content not found");
+    }
+
+    if ( ! $identity ) {
+        $logger->info("Skipping: identity not found");
+        continue;
+    }
+
+    $htmlTitle = $title->C14N();
+    $titleText = preg_replace('#[\t\n ]+#',' ',$title->textContent);
+
+    echo "\t{$identity} => {$titleText}\n";
+
+    $html = $content->C14N();
+    $html = str_replace(
+        array('></br>','></input>'),
+        '/>',$html
+    );
+
+    $args = array(
+        'title'      => $titleText,
+        'html_title' => $htmlTitle,
+        'lang'       => $lang,
+        'content'    => $html,
+        'identity'   => $identity,
+    );
+    $args = array_merge( (array)$config['Defaults'], $args );
+    $page = new \PageBundle\Model\Page;
+
+    $logger->info("Creating page with $identity...");
+
+    $ret = $page->createOrUpdate($args,array('identity','lang'));
+    if (! $ret->success) {
+        echo $ret;
+        die();
+    }
+    $logger->info("Successfully imported.");
+}
+

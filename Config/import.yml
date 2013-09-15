@@ -1,0 +1,8 @@
+---
+Templates:
+  - "design/design/*.html"
+Selectors:
+  title: .page-title
+  content: .content
+Defaults:
+  lang: zh_TW
