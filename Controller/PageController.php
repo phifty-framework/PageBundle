@@ -3,7 +3,7 @@ namespace PageBundle\Controller;
 use Phifty\Controller;
 use PageBundle\Model\Page;
 
-class PageBundleController extends Controller
+class PageController extends Controller
 {
     public $pageTemplate = '_page.html';
 
