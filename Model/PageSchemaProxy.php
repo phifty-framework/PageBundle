@@ -118,7 +118,7 @@ class PageSchemaProxy extends RuntimeSchema
           'type' => 'varchar(120)',
           'isa' => 'str',
           'size' => 120,
-          'label' => 'Page Identity',
+          'label' => '頁面識別',
         ),
     ),
   'created_on' => array( 
@@ -131,7 +131,7 @@ class PageSchemaProxy extends RuntimeSchema
           'renderAs' => 'DateTimeInput',
           'widgetAttributes' => array( 
             ),
-          'label' => 'Created on',
+          'label' => '建立於',
           'default' => function() {
                 return date('c');
             },
@@ -150,7 +150,7 @@ class PageSchemaProxy extends RuntimeSchema
           'default' => function() {
                 return date('c');
             },
-          'label' => 'Updated on',
+          'label' => '更新時間',
         ),
     ),
   'created_by' => array( 

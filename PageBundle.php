@@ -35,7 +35,7 @@ class PageBundle extends Bundle
 
         $self = $this;
         kernel()->event->register( 'adminui.init_menu' , function($menu) use ($self) {
-            $menu->createCrudMenuItem( 'pages', _('PageBundle') );
+            $menu->createCrudMenuItem( 'pages', _('Pages') );
         });
     }
 }
