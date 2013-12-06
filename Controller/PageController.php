@@ -9,7 +9,7 @@ class PageController extends Controller
 
     public function init()
     {
-        $bundle = kernel()->plugin('PageBundle');
+        $bundle = kernel()->bundle('PageBundle');
         if ( $t = $bundle->config('template') ) {
             $this->pageTemplate = $t;
         }
@@ -31,7 +31,7 @@ class PageController extends Controller
             return $this->render( $this->getPageTemplate() ,array( 'page' => $page ));
         }
 
-        if ( kernel()->plugin('PageBundle')->config('lang_fallback') ) {
+        if ( kernel()->bundle('PageBundle')->config('lang_fallback') ) {
             $page->load( array( 'identity' => $identity ) );
             if ($page->id) {
                 return $this->render( $this->getPageTemplate() ,array( 'page' => $page ));
