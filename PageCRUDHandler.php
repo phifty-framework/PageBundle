@@ -24,6 +24,6 @@ class PageCRUDHandler extends \AdminUI\CRUDHandler
     public function init()
     {
         parent::init();
-        $this->plugin = PageBundle::getInstance();
+        $this->bundle = PageBundle::getInstance();
     }
 }

@@ -2,7 +2,7 @@
     vim:filetype=htmldjango: 
 #}
 {% extends '@CRUD/edit.html' %}
-{% set plugin = Kernel.plugin('PageBundle') %}
+{% set plugin = Kernel.bundle('PageBundle') %}
 
 {% block section_body %}
 <form enctype="multipart/form-data" class="ajax-action" method="POST">
