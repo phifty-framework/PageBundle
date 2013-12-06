@@ -2,7 +2,7 @@
     vim:filetype=htmldjango: 
 #}
 {% extends '@CRUD/edit.html' %}
-{% set plugin = Kernel.bundle('PageBundle') %}
+{% set bundle = Kernel.bundle('PageBundle') %}
 
 {% block section_body %}
 <form enctype="multipart/form-data" class="ajax-action" method="POST">
@@ -12,25 +12,25 @@
 
     {{ CRUD.Action.renderSignatureWidget|raw}}
 
-    {% if plugin.config('with_title') %}
+    {% if bundle.config('with_title') %}
         {{ CRUD.Action.renderField('title',{ size: 50 })|raw }}
     {% endif %}
 
-    {% if plugin.config('with_html_title') %}
+    {% if bundle.config('with_html_title') %}
         {{ CRUD.Action.renderField('html_title',{ size: 60 })|raw }}
     {% endif %}
 
-    {% if plugin.config('with_subtitle') %}
+    {% if bundle.config('with_subtitle') %}
         {{ CRUD.Action.renderField('html_subtitle',{ size: 60 })|raw }}
     {% endif %}
 
-    {% if plugin.config('with_lang') %}
+    {% if bundle.config('with_lang') %}
         {{ CRUD.Action.renderField('lang')|raw }}
     {% endif %}
 
     {{ CRUD.Action.renderField('identity')|raw }}
 
-    {% if plugin.config('show_page_link') %}
+    {% if bundle.config('show_page_link') %}
         {% if CRUD.Record.id %}
             <div class="v-field">
                 <div class="desc">
@@ -120,7 +120,7 @@ $(function() {
     },
 
     // Example content CSS (should be your site CSS)
-    content_css : "/assets/phifty-core/js/tinymce_content.css,{{plugin.config('styles')|join(',')}}",
+    content_css : "/assets/phifty-core/js/tinymce_content.css,{{bundle.config('styles')|join(',')}}",
 
     // Skin options
     skin : "o2k7",
