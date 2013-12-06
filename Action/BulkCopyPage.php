@@ -15,7 +15,7 @@ class BulkCopyPage extends BulkRecordAction
 
     public function run()
     {
-        $plugin = \PageBundle\PageBundle::getInstance();
+        $bundle = \PageBundle\PageBundle::getInstance();
 
         $newRecord = new $this->recordClass;
         $records = $this->loadRecords();

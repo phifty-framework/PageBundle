@@ -9,11 +9,11 @@ class PageController extends Controller
 
     public function init()
     {
-        $plugin = kernel()->plugin('PageBundle');
-        if ( $t = $plugin->config('template') ) {
+        $bundle = kernel()->plugin('PageBundle');
+        if ( $t = $bundle->config('template') ) {
             $this->pageTemplate = $t;
         }
-        if( $viewClass = $plugin->config('view_class') ) {
+        if( $viewClass = $bundle->config('view_class') ) {
             $this->defaultViewClass = $viewClass;
         }
     }
