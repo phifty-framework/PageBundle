@@ -30,7 +30,7 @@ class PageBundle extends Bundle
     public function init()
     {
         $this->expandRoute( '/bs/pages', 'PageBundle\\PageCRUDHandler' );
-        $this->route('/page/:identity(/:id/:title)','PageController:page');
+        $this->route('/page/:handle(/:id/:title)','PageController:page');
         $this->addCRUDAction( 'Page' , array('Create','Update','Delete','BulkDelete'));
 
         $self = $this;

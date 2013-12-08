@@ -28,16 +28,16 @@
         {{ CRUD.Action.renderField('lang')|raw }}
     {% endif %}
 
-    {{ CRUD.Action.renderField('identity')|raw }}
+    {{ CRUD.Action.renderField('handle')|raw }}
 
     {% if bundle.config('show_page_link') %}
         {% if CRUD.Record.id %}
             <div class="v-field">
                 <div class="desc">
                 {% trans 'Link' %}:
-                <a target="_blank" href="/page/{{ CRUD.Record.identity }}/{{ CRUD.Record.id }}/{{ CRUD.Record.title }}">
+                <a target="_blank" href="/page/{{ CRUD.Record.handle }}/{{ CRUD.Record.id }}/{{ CRUD.Record.title }}">
                     <code style="background-color: #ccc; padding: 2px; border: 1px solid #aaa;">
-                        /page/{{ CRUD.Record.identity|default('Identity') }}/{{ CRUD.Record.id }}/{{ CRUD.Record.title }}
+                        /page/{{ CRUD.Record.handle|default('Handle') }}/{{ CRUD.Record.id }}/{{ CRUD.Record.title }}
                     </code>
                 </a>
                 </div>
@@ -46,7 +46,7 @@
             <div class="v-field">
                 <div class="desc">
                     {% trans 'Link' %}:
-                    <a href="#"><code style="background-color: #ccc; padding: 2px; border: 1px solid #aaa;">/page/{% trans 'id' %}/{% trans 'Page identity' %}/{% trans 'Title' %}</code></a>
+                    <a href="#"><code style="background-color: #ccc; padding: 2px; border: 1px solid #aaa;">/page/{% trans 'id' %}/{% trans 'Page handle' %}/{% trans 'Title' %}</code></a>
                 </div>
             </div>
         {% endif %}

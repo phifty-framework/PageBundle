@@ -78,9 +78,9 @@ foreach( $files as $file ) {
 
     $lang = $title->getAttribute('data-lang') ?: $content->getAttribute('data-lang');
 
-    $identity = $title->getAttribute('data-identity')
-            ?: $content->getAttribute('data-identity')
-            ?: basename($file,'.html'); // get identity from file name
+    $handle = $title->getAttribute('data-handle')
+            ?: $content->getAttribute('data-handle')
+            ?: basename($file,'.html'); // get handle from file name
 
     if ( ! $title ) {
         $logger->info("Skipping: title not found");
@@ -89,15 +89,15 @@ foreach( $files as $file ) {
         $logger->info("Skipping: content not found");
     }
 
-    if ( ! $identity ) {
-        $logger->info("Skipping: identity not found");
+    if ( ! $handle ) {
+        $logger->info("Skipping: handle not found");
         continue;
     }
 
     $htmlTitle = $title->C14N();
     $titleText = preg_replace('#[\t\n ]+#',' ',$title->textContent);
 
-    echo "\t{$identity} => {$titleText}\n";
+    echo "\t{$handle} => {$titleText}\n";
 
     $html = $content->C14N();
     $html = str_replace(
@@ -110,14 +110,14 @@ foreach( $files as $file ) {
         'html_title' => $htmlTitle,
         'lang'       => $lang,
         'content'    => $html,
-        'identity'   => $identity,
+        'handle'   => $handle,
     );
     $args = array_merge( (array)$config['Defaults'], $args );
     $page = new \PageBundle\Model\Page;
 
-    $logger->info("Creating page with $identity...");
+    $logger->info("Creating page with $handle...");
 
-    $ret = $page->createOrUpdate($args,array('identity','lang'));
+    $ret = $page->createOrUpdate($args,array('handle','lang'));
     if (! $ret->success) {
         echo $ret;
         die();

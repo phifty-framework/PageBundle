@@ -23,25 +23,24 @@ class PageController extends Controller
         return $this->pageTemplate;
     }
 
-    public function renderPageContent($identity, $lang)
+    public function renderPageContent($handle, $lang)
     {
         $page = new Page;
-        $page->load( array( 'lang' => $lang , 'identity' => $identity ) );
+        $page->load( array( 'lang' => $lang , 'handle' => $handle ) );
         if ( $page->id ) {
             return $this->render( $this->getPageTemplate() ,array( 'page' => $page ));
         }
 
         if ( kernel()->bundle('PageBundle')->config('lang_fallback') ) {
-            $page->load( array( 'identity' => $identity ) );
+            $page->load( array( 'handle' => $handle ) );
             if ($page->id) {
                 return $this->render( $this->getPageTemplate() ,array( 'page' => $page ));
             }
         }
     }
 
-    public function pageAction($identity,$title = '',$id = null)
+    public function pageAction($handle, $title = '',$id = null)
     {
-        $lang = kernel()->locale->current;
-        return $this->renderPageContent($identity, $lang);
+        return $this->renderPageContent($handle, kernel()->locale->current );
     }
 }

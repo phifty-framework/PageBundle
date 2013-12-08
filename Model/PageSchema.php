@@ -26,9 +26,9 @@ class PageSchema extends SchemaDeclare
             ->text()
             ->label('內文 HTML');
 
-        $this->column('identity')
+        $this->column('handle')
             ->varchar(120)
-            ->label( _('Page Identity') );
+            ->label( _('Page Handle') );
 
         $this->mixin('Phifty\\Model\\Mixin\\MetadataSchema');
         $this->mixin('Phifty\\Model\\Mixin\\I18NSchema');
@@ -40,7 +40,7 @@ class PageSchema extends SchemaDeclare
             $pageId = preg_replace( '/\W/' , '_', strtolower( $title ) );
             foreach( explode(' ','zh_TW en') as $lang ) {
                 $record->create(array(
-                        'identity' => $pageId,
+                        'handle' => $pageId,
                         'title' => $title,
                         'html_title' => $title,
                         'lang' => $lang,
