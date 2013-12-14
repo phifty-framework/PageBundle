@@ -6,21 +6,18 @@ class PageSchema extends SchemaDeclare
 {
     public function schema()
     {
+        $bundle = \PageBundle\PageBundle::getInstance();
+
         $this->column('title')
             ->varchar(512)
             ->label( _('頁面標題') );
 
-        $this->column('subtitle')
-            ->varchar(512)
-            ->label( _('頁面子標題') );
 
-        $this->column('html_title')
-            ->varchar(512)
-            ->label( '頁面標題 HTML' );
-
-        $this->column('html_subtitle')
-            ->varchar(512)
-            ->label( '頁面副標題' );
+        if ( $bundle->config('with_subtitle') ) {
+            $this->column('subtitle')
+                ->varchar(512)
+                ->label( _('頁面子標題') );
+        }
 
         $this->column('content')
             ->text()
