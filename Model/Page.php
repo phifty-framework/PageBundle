@@ -15,9 +15,6 @@ extends \PageBundle\Model\PageBase
         if ( ! $page->id ) {
             $page->load(array( 'handle' => $handle) );
         }
-        if ( ! $page->id ) {
-            return;
-        }
         return $page;
     }
 }
