@@ -4,9 +4,10 @@ namespace PageBundle\Model;
 class Page 
 extends \PageBundle\Model\PageBase
 {
+
     public function getLink()
     {
-        return "/" . join("/", array("page", $this->handle, $this->id, $this->title));
+        return "/" . join("/", array("page", $this->handle, $this->id, rawurlencode($this->title) ));
     }
 
     public static function byHandle($handle, $lang = null) {
