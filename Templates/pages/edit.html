@@ -16,12 +16,8 @@
         {{ CRUD.Action.renderField('title',{ size: 50 })|raw }}
     {% endif %}
 
-    {% if bundle.config('with_html_title') %}
-        {{ CRUD.Action.renderField('html_title',{ size: 60 })|raw }}
-    {% endif %}
-
     {% if bundle.config('with_subtitle') %}
-        {{ CRUD.Action.renderField('html_subtitle',{ size: 60 })|raw }}
+        {{ CRUD.Action.renderField('subtitle',{ size: 60 })|raw }}
     {% endif %}
 
     {% if bundle.config('with_lang') %}
