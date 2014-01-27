@@ -31,9 +31,9 @@
             <div class="v-field">
                 <div class="desc">
                 {% trans 'Link' %}:
-                <a target="_blank" href="/page/{{ CRUD.Record.handle }}/{{ CRUD.Record.id }}/{{ CRUD.Record.title }}">
+                <a target="_blank" href="/page/{{ CRUD.Record.handle }}/{{ CRUD.Record.id }}/{{ CRUD.Record.title|url_encode}}">
                     <code style="background-color: #ccc; padding: 2px; border: 1px solid #aaa;">
-                        /page/{{ CRUD.Record.handle|default('Handle') }}/{{ CRUD.Record.id }}/{{ CRUD.Record.title }}
+                        /page/{{ CRUD.Record.handle|default('Handle') }}/{{ CRUD.Record.id }}/{{ CRUD.Record.title}}
                     </code>
                 </a>
                 </div>
@@ -42,7 +42,7 @@
             <div class="v-field">
                 <div class="desc">
                     {% trans 'Link' %}:
-                    <a href="#"><code style="background-color: #ccc; padding: 2px; border: 1px solid #aaa;">/page/{% trans 'id' %}/{% trans 'Page handle' %}/{% trans 'Title' %}</code></a>
+                    <a href="#"><code style="background-color: #ccc; padding: 2px; border: 1px solid #aaa;">/page/{% trans 'Page handle' %}/{% trans 'ID' %}/{% trans 'Title' %}</code></a>
                 </div>
             </div>
         {% endif %}
