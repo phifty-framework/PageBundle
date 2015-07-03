@@ -11,6 +11,7 @@
     {% endif %}
 
     {{ CRUD.Action.renderSignatureWidget|raw}}
+    {{ CRUD.Action.renderCSRFTokenWidget|raw}}
 
     {% if bundle.config('with_title') %}
         {{ CRUD.Action.renderField('title',{ size: 50 })|raw }}
