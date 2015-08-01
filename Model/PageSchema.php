@@ -27,7 +27,7 @@ class PageSchema extends SchemaDeclare
             ->varchar(120)
             ->label( _('Page Handle') );
 
-        $this->mixin('Phifty\\Model\\Mixin\\MetadataSchema');
+        $this->mixin('CommonBundle\\Model\\Mixin\\MetaSchema');
         $this->mixin('Phifty\\Model\\Mixin\\I18NSchema');
     }
 
