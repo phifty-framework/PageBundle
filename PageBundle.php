@@ -7,10 +7,8 @@ use Phifty\Region;
 use Phifty\CRUDHandler;
 use PageBundle\PageBundle;
 
-
 class PageBundle extends Bundle
 {
-
     public function defaultConfig()
     {
         return array(
@@ -26,16 +24,10 @@ class PageBundle extends Bundle
         );
     }
 
-
     public function init()
     {
-        $this->mount( '/bs/pages', 'PageBundle\\PageCRUDHandler' );
+        $this->mount('/bs/page', 'PageBundle\\PageCRUDHandler');
         $this->route('/page/:handle(/:id/:title)','PageController:page');
         $this->addRecordAction( 'Page' , array('Create','Update','Delete','BulkDelete'));
-
-        $self = $this;
-        kernel()->event->register( 'adminui.init_menu' , function($menu) use ($self) {
-            $menu->createCrudMenuItem( 'pages', _('Pages') );
-        });
     }
 }

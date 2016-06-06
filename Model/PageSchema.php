@@ -12,7 +12,6 @@ class PageSchema extends SchemaDeclare
             ->varchar(512)
             ->label( _('頁面標題') );
 
-
         if ( $bundle->config('with_subtitle') ) {
             $this->column('subtitle')
                 ->varchar(512)
@@ -21,6 +20,9 @@ class PageSchema extends SchemaDeclare
 
         $this->column('content')
             ->text()
+            ->renderAs('TextareaInput', [
+                'class' => '+=mceEditor',
+            ])
             ->label('內文 HTML');
 
         $this->column('handle')

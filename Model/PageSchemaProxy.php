@@ -131,6 +131,10 @@ class PageSchemaProxy
         $this->columns[ 'content' ] = new RuntimeColumn('content',array( 
       'locales' => NULL,
       'attributes' => array( 
+          'renderAs' => 'TextareaInput',
+          'widgetAttributes' => array( 
+              'class' => '+=mceEditor',
+            ),
           'label' => '內文 HTML',
         ),
       'name' => 'content',
@@ -141,6 +145,10 @@ class PageSchemaProxy
       'notNull' => NULL,
       'enum' => NULL,
       'set' => NULL,
+      'renderAs' => 'TextareaInput',
+      'widgetAttributes' => array( 
+          'class' => '+=mceEditor',
+        ),
       'label' => '內文 HTML',
     ));
         $this->columns[ 'handle' ] = new RuntimeColumn('handle',array( 

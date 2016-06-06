@@ -1,7 +1,7 @@
 {# 
     vim:filetype=htmldjango: 
 #}
-{% extends '@CRUD/edit.html' %}
+{% extends '@AppCRUD/edit.html' %}
 {% set bundle = Kernel.bundle('PageBundle') %}
 
 {% block section_body %}
@@ -11,9 +11,6 @@
     {% if CRUD.Record.id %}
         {{CRUD.Action.renderField('id')|raw}}
     {% endif %}
-
-
-    {{ CRUD.Action.renderSignatureWidget|raw}}
 
     {% if bundle.config('with_title') %}
         {{ CRUD.Action.renderField('title',{ size: 50 })|raw }}
