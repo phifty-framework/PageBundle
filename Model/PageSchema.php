@@ -28,7 +28,7 @@ class PageSchema extends SchemaDeclare
             ->label( _('Page Handle') );
 
         $this->mixin('CommonBundle\\Model\\Mixin\\MetaSchema');
-        $this->mixin('Phifty\\Model\\Mixin\\I18NSchema');
+        $this->mixin('I18N\\Model\\Mixin\\I18NSchema');
     }
 
     public function bootstrap($record)

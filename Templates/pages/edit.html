@@ -5,13 +5,15 @@
 {% set bundle = Kernel.bundle('PageBundle') %}
 
 {% block section_body %}
-<form enctype="multipart/form-data" class="ajax-action" method="POST">
+<form enctype="multipart/form-data" class="ajax-action form-horizontal" method="POST">
+    {{ CRUD.Action.renderSignatureWidget|raw }}
+    {{ CRUD.Action.renderCSRFTokenWidget|raw}}
     {% if CRUD.Record.id %}
-        {{ forms.hidden('id', CRUD.Record.id) }}
+        {{CRUD.Action.renderField('id')|raw}}
     {% endif %}
 
+
     {{ CRUD.Action.renderSignatureWidget|raw}}
-    {{ CRUD.Action.renderCSRFTokenWidget|raw}}
 
     {% if bundle.config('with_title') %}
         {{ CRUD.Action.renderField('title',{ size: 50 })|raw }}
@@ -60,7 +62,10 @@
         {% include '@CRUD/metadata.html' %}
         </div>
     </div>
+
     <div class="clear"> </div>
+
+    {% include '@CRUD/controll.html' %}
 </form>
 {% endblock %}
 

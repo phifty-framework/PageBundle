@@ -29,9 +29,9 @@ class PageBundle extends Bundle
 
     public function init()
     {
-        $this->expandRoute( '/bs/pages', 'PageBundle\\PageCRUDHandler' );
+        $this->mount( '/bs/pages', 'PageBundle\\PageCRUDHandler' );
         $this->route('/page/:handle(/:id/:title)','PageController:page');
-        $this->addRecordAction( 'Page');
+        $this->addRecordAction( 'Page' , array('Create','Update','Delete','BulkDelete'));
 
         $self = $this;
         kernel()->event->register( 'adminui.init_menu' , function($menu) use ($self) {
