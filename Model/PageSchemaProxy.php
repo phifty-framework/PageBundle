@@ -106,6 +106,7 @@ class PageSchemaProxy
       'notNull' => true,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'autoIncrement' => true,
       'renderAs' => 'HiddenInput',
       'widgetAttributes' => array( 
@@ -125,6 +126,7 @@ class PageSchemaProxy
       'notNull' => NULL,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'length' => 512,
       'label' => '頁面標題',
     ));
@@ -145,6 +147,7 @@ class PageSchemaProxy
       'notNull' => NULL,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'renderAs' => 'TextareaInput',
       'widgetAttributes' => array( 
           'class' => '+=mceEditor',
@@ -165,6 +168,7 @@ class PageSchemaProxy
       'notNull' => NULL,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'length' => 120,
       'label' => 'Page Handle',
     ));
@@ -177,7 +181,7 @@ class PageSchemaProxy
             ),
           'label' => '建立時間',
           'default' => function() {
-                    return date('c');
+                    return new \DateTime;
                 },
         ),
       'name' => 'created_on',
@@ -188,13 +192,14 @@ class PageSchemaProxy
       'notNull' => false,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'timezone' => true,
       'renderAs' => 'DateTimeInput',
       'widgetAttributes' => array( 
         ),
       'label' => '建立時間',
       'default' => function() {
-                    return date('c');
+                    return new \DateTime;
                 },
     ));
         $this->columns[ 'updated_on' ] = new RuntimeColumn('updated_on',array( 
@@ -204,9 +209,12 @@ class PageSchemaProxy
           'renderAs' => 'DateTimeInput',
           'widgetAttributes' => array( 
             ),
-          'default' => function() {
-                    return date('c');
-                },
+          'default' => \SQLBuilder\Raw::__set_state(array( 
+      'value' => 'CURRENT_TIMESTAMP',
+    )),
+          'onUpdate' => \SQLBuilder\Raw::__set_state(array( 
+      'value' => 'CURRENT_TIMESTAMP',
+    )),
           'label' => '更新時間',
         ),
       'name' => 'updated_on',
@@ -217,13 +225,16 @@ class PageSchemaProxy
       'notNull' => false,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => \SQLBuilder\Raw::__set_state(array( 
+      'value' => 'CURRENT_TIMESTAMP',
+    )),
       'timezone' => true,
       'renderAs' => 'DateTimeInput',
       'widgetAttributes' => array( 
         ),
-      'default' => function() {
-                    return date('c');
-                },
+      'default' => \SQLBuilder\Raw::__set_state(array( 
+      'value' => 'CURRENT_TIMESTAMP',
+    )),
       'label' => '更新時間',
     ));
         $this->columns[ 'created_by' ] = new RuntimeColumn('created_by',array( 
@@ -248,6 +259,7 @@ class PageSchemaProxy
       'notNull' => NULL,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'refer' => 'UserBundle\\Model\\User',
       'default' => function() {
                     if (isset($_SESSION)) {
@@ -281,6 +293,7 @@ class PageSchemaProxy
       'notNull' => NULL,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'refer' => 'UserBundle\\Model\\User',
       'default' => function() {
                     if ( isset($_SESSION) ) {
@@ -320,6 +333,7 @@ class PageSchemaProxy
       'notNull' => NULL,
       'enum' => NULL,
       'set' => NULL,
+      'onUpdate' => NULL,
       'length' => 12,
       'validValues' => function() {
                     return array_flip( kernel()->locale->available() );

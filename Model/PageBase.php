@@ -10,6 +10,7 @@ use LazyRecord\BaseModel;
 class PageBase
     extends BaseModel
 {
+    const SCHEMA_CLASS = 'PageBundle\\Model\\PageSchema';
     const SCHEMA_PROXY_CLASS = 'PageBundle\\Model\\PageSchemaProxy';
     const COLLECTION_CLASS = 'PageBundle\\Model\\PageCollection';
     const MODEL_CLASS = 'PageBundle\\Model\\Page';
