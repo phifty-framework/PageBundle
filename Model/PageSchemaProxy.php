@@ -315,7 +315,7 @@ class PageSchemaProxy
           'label' => '語言',
           'default' => function() {
                     $bundle = \I18N\I18N::getInstance();
-                    if ( $lang = $bundle->config('default_lang') ) {
+                    if ($lang = $bundle->config('default_lang') ) {
                         return $lang;
                     }
                     return kernel()->locale->getDefault();
@@ -341,7 +341,7 @@ class PageSchemaProxy
       'label' => '語言',
       'default' => function() {
                     $bundle = \I18N\I18N::getInstance();
-                    if ( $lang = $bundle->config('default_lang') ) {
+                    if ($lang = $bundle->config('default_lang') ) {
                         return $lang;
                     }
                     return kernel()->locale->getDefault();
