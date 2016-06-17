@@ -7,7 +7,7 @@
         { "name": "c9s", "email": "yoanlin93@gmail.com" }
     ],
     "require": {
-        "composer/installers": "~1.0.0"
+        "composer/installers": "dev-master"
     },
     "require-dev": { },
     "autoload": { "psr-4": { "PageBundle\\": "" } },
