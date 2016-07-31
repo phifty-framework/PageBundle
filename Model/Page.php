@@ -12,9 +12,9 @@ extends \PageBundle\Model\PageBase
 
     public static function byHandle($handle, $lang = null) {
         $page = new self;
-        $page->load(array( 'handle' => $handle, 'lang' => $lang ? $lang : kernel()->locale->current() ));
-        if ( ! $page->id ) {
-            $page->load(array( 'handle' => $handle) );
+        $page->load(array('handle' => $handle, 'lang' => $lang ? $lang : kernel()->locale->current()));
+        if (! $page->id) {
+            $page->load(array('handle' => $handle));
         }
         return $page;
     }

@@ -2,7 +2,7 @@
 namespace PageBundle\Model;
 use LazyRecord\Schema\RuntimeSchema;
 use LazyRecord\Schema\RuntimeColumn;
-use LazyRecord\Schema\Relationship;
+use LazyRecord\Schema\Relationship\Relationship;
 class PageSchemaProxy
     extends RuntimeSchema
 {
@@ -59,7 +59,7 @@ class PageSchemaProxy
     public function __construct()
     {
         $this->relations = array( 
-      'created_by' => \LazyRecord\Schema\Relationship::__set_state(array( 
+      'created_by' => \LazyRecord\Schema\Relationship\BelongsTo::__set_state(array( 
       'data' => array( 
           'type' => 3,
           'self_schema' => 'PageBundle\\Model\\PageSchema',
@@ -73,8 +73,9 @@ class PageSchemaProxy
         ),
       'onUpdate' => NULL,
       'onDelete' => NULL,
+      'usingIndex' => false,
     )),
-      'updated_by' => \LazyRecord\Schema\Relationship::__set_state(array( 
+      'updated_by' => \LazyRecord\Schema\Relationship\BelongsTo::__set_state(array( 
       'data' => array( 
           'type' => 3,
           'self_schema' => 'PageBundle\\Model\\PageSchema',
@@ -88,6 +89,7 @@ class PageSchemaProxy
         ),
       'onUpdate' => NULL,
       'onDelete' => NULL,
+      'usingIndex' => false,
     )),
     );
         $this->columns[ 'id' ] = new RuntimeColumn('id',array( 
@@ -240,7 +242,8 @@ class PageSchemaProxy
         $this->columns[ 'created_by' ] = new RuntimeColumn('created_by',array( 
       'locales' => NULL,
       'attributes' => array( 
-          'refer' => 'UserBundle\\Model\\User',
+          'refer' => 'UserBundle\\Model\\UserSchema',
+          'length' => NULL,
           'default' => function() {
                     if (isset($_SESSION)) {
                         return kernel()->currentUser->id;
@@ -260,7 +263,8 @@ class PageSchemaProxy
       'enum' => NULL,
       'set' => NULL,
       'onUpdate' => NULL,
-      'refer' => 'UserBundle\\Model\\User',
+      'refer' => 'UserBundle\\Model\\UserSchema',
+      'length' => NULL,
       'default' => function() {
                     if (isset($_SESSION)) {
                         return kernel()->currentUser->id;
@@ -274,7 +278,8 @@ class PageSchemaProxy
         $this->columns[ 'updated_by' ] = new RuntimeColumn('updated_by',array( 
       'locales' => NULL,
       'attributes' => array( 
-          'refer' => 'UserBundle\\Model\\User',
+          'refer' => 'UserBundle\\Model\\UserSchema',
+          'length' => NULL,
           'default' => function() {
                     if ( isset($_SESSION) ) {
                         return kernel()->currentUser->id;
@@ -294,7 +299,8 @@ class PageSchemaProxy
       'enum' => NULL,
       'set' => NULL,
       'onUpdate' => NULL,
-      'refer' => 'UserBundle\\Model\\User',
+      'refer' => 'UserBundle\\Model\\UserSchema',
+      'length' => NULL,
       'default' => function() {
                     if ( isset($_SESSION) ) {
                         return kernel()->currentUser->id;
