@@ -28,6 +28,6 @@ class PageBundle extends Bundle
     {
         $this->mount('/bs/page', 'PageBundle\\PageCRUDHandler');
         $this->route('/page/:handle(/:id/:title)','PageController:page');
-        $this->addRecordAction( 'Page' , array('Create','Update','Delete','BulkDelete'));
+        $this->addRecordAction( 'Page' , ['Create','Update','Delete','BulkDelete']);
     }
 }
