@@ -1,6 +1,8 @@
 <?php
+
 namespace PageBundle\Action;
-use ActionKit\RecordAction\BulkRecordAction;
+
+use WebAction\RecordAction\BulkRecordAction;
 
 class BulkCopyPage extends BulkRecordAction
 {
