@@ -2,10 +2,6 @@
 namespace PageBundle;
 
 use Phifty\Bundle;
-use Phifty\Routing\RouteSet;
-use Phifty\Region;
-use Phifty\CRUDHandler;
-use PageBundle\PageBundle;
 
 class PageBundle extends Bundle
 {
@@ -24,9 +20,9 @@ class PageBundle extends Bundle
         );
     }
 
-    public function init()
+    public function boot()
     {
-        $this->mount('/bs/page', 'PageBundle\\PageCRUDHandler');
+        $this->mount('/bs/page', PageCRUDHandler::class);
         $this->route('/page/:handle(/:id/:title)','PageController:page');
         $this->addRecordAction( 'Page' , ['Create','Update','Delete','BulkDelete']);
     }

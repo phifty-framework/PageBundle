@@ -1,8 +1,9 @@
 <?php
 namespace PageBundle\Model;
-use LazyRecord\Schema\SchemaDeclare;
 
-class PageSchema extends SchemaDeclare
+use Maghead\Schema\DeclareSchema;
+
+class PageSchema extends DeclareSchema
 {
     public function schema()
     {

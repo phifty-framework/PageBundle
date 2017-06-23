@@ -1,6 +1,7 @@
 <?php
 namespace PageBundle\Controller;
-use Phifty\Controller;
+
+use Phifty\Routing\Controller;
 use PageBundle\Model\Page;
 
 class PageController extends Controller
@@ -9,7 +10,7 @@ class PageController extends Controller
 
     public function init()
     {
-        $bundle = kernel()->bundle('PageBundle');
+        $bundle = $this->kernel->bundle('PageBundle');
         if ( $t = $bundle->config('template') ) {
             $this->pageTemplate = $t;
         }
@@ -18,22 +19,21 @@ class PageController extends Controller
         }
     }
 
-    public function getPageTemplate()
+    protected function getPageTemplate()
     {
         return $this->pageTemplate;
     }
 
-    public function renderPageContent($handle, $lang)
+    protected function renderPageContent($handle, $lang)
     {
-        $page = new Page;
-        $page->load( array( 'lang' => $lang , 'handle' => $handle ) );
-        if ( $page->id ) {
-            return $this->render( $this->getPageTemplate() ,array( 'page' => $page ));
+        $page = Page::load( array( 'lang' => $lang , 'handle' => $handle ) );
+        if ($page) {
+            return $this->render($this->getPageTemplate() ,array( 'page' => $page ));
         }
 
-        if ( kernel()->bundle('PageBundle')->config('lang_fallback') ) {
-            $page->load( array( 'handle' => $handle ) );
-            if ($page->id) {
+        if ($this->kernel->bundle('PageBundle')->config('lang_fallback') ) {
+            $page = Page::load(array( 'handle' => $handle ) );
+            if ($page) {
                 return $this->render( $this->getPageTemplate() ,array( 'page' => $page ));
             }
         }
@@ -41,6 +41,6 @@ class PageController extends Controller
 
     public function pageAction($handle, $title = '',$id = null)
     {
-        return $this->renderPageContent($handle, kernel()->locale->current );
+        return $this->renderPageContent($handle, $this->kernel->locale->current );
     }
 }
