@@ -8,8 +8,9 @@ class PageBundle extends Bundle
     public function defaultConfig()
     {
         return array(
-            'template' => '_page.html',
-            'view_class' => null,
+            'Template' => '_page.html',
+            'ViewClass' => null,
+
             'with_title' => true,
             'with_html_title' => false,
             'with_subtitle' => false,

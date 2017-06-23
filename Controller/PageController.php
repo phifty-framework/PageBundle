@@ -11,10 +11,11 @@ class PageController extends Controller
     public function init()
     {
         $bundle = $this->kernel->bundle('PageBundle');
-        if ( $t = $bundle->config('template') ) {
+        if ($t = $bundle->config('Template')) {
             $this->pageTemplate = $t;
         }
-        if( $viewClass = $bundle->config('view_class') ) {
+
+        if ($viewClass = $bundle->config('ViewClass') ) {
             $this->defaultViewClass = $viewClass;
         }
     }
@@ -26,7 +27,7 @@ class PageController extends Controller
 
     protected function renderPageContent($handle, $lang)
     {
-        $page = Page::load( array( 'lang' => $lang , 'handle' => $handle ) );
+        $page = Page::load([ 'lang' => $lang , 'handle' => $handle ]);
         if ($page) {
             return $this->render($this->getPageTemplate() ,array( 'page' => $page ));
         }
