@@ -240,9 +240,7 @@ class PageSchemaProxy
       'locales' => NULL,
       'attributes' => array( 
           'timezone' => true,
-          'default' => \Magsql\Raw::__set_state(array( 
-      'value' => 'CURRENT_TIMESTAMP',
-    )),
+          'default' => function() { return new \DateTime; },
           'label' => '建立時間',
           'renderAs' => 'DateTimeInput',
           'widgetAttributes' => array( 
@@ -253,14 +251,12 @@ class PageSchemaProxy
       'unsigned' => NULL,
       'type' => 'timestamp',
       'isa' => 'DateTime',
-      'notNull' => NULL,
+      'notNull' => true,
       'enum' => NULL,
       'set' => NULL,
       'onUpdate' => NULL,
       'timezone' => true,
-      'default' => \Magsql\Raw::__set_state(array( 
-      'value' => 'CURRENT_TIMESTAMP',
-    )),
+      'default' => function() { return new \DateTime; },
       'label' => '建立時間',
       'renderAs' => 'DateTimeInput',
       'widgetAttributes' => array( 
