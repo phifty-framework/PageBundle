@@ -29,19 +29,26 @@ class PageController extends Controller
     {
         $page = Page::load([ 'lang' => $lang , 'handle' => $handle ]);
         if ($page) {
-            return $this->render($this->getPageTemplate() ,array( 'page' => $page ));
+            return $this->render($this->getPageTemplate(), [
+                'page' => $page,
+                'update' => $page->asUpdateAction(),
+            ]);
         }
 
         if ($this->kernel->bundle('PageBundle')->config('lang_fallback') ) {
-            $page = Page::load(array( 'handle' => $handle ) );
-            if ($page) {
-                return $this->render( $this->getPageTemplate() ,array( 'page' => $page ));
+            $page = Page::load([ 'handle' => $handle ]);
+            if (!$page) {
+                return $this->error("Page not found.");
             }
+            return $this->render( $this->getPageTemplate(), [
+                'page' => $page,
+                'update' => $page->asUpdateAction(),
+            ]);
         }
     }
 
     public function pageAction($handle, $title = '',$id = null)
     {
-        return $this->renderPageContent($handle, $this->kernel->locale->current );
+        return $this->renderPageContent($handle, $this->kernel->locale->current);
     }
 }
