@@ -42,6 +42,7 @@ class PageController extends Controller
             }
             return $this->render( $this->getPageTemplate(), [
                 'page' => $page,
+                'page_title' => $page->title,
                 'update' => $page->asUpdateAction(),
             ]);
         }
